@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🧠 The 20/80 Backend Course
+# 🛡️ Bulletproof Backend
 
 ### The only map you need to go from *"I kinda get backend"* to *"I can reason about any backend problem."*
 
@@ -14,6 +14,18 @@
 
 ---
 
+## The Promise
+
+Most backend engineers write code that *works*. Very few write code that **holds up**.
+
+That gap — between shipping and *shipping that survives production* — is where imposter syndrome lives. It's not that you don't know enough. It's that you can't yet tell **which** things matter.
+
+**This repo closes that gap.** Not by giving you 400 links. By giving you the handful of concepts that carry almost all the weight — the ones that let you reason about problems you haven't seen before.
+
+> 🛡️ **Learn what matters. Build things that don't break.**
+
+---
+
 ## The Problem
 
 Backend engineering is **enormous.** You could spend ten years and still not "learn all of it." Distributed systems, databases, networking, security, infrastructure, observability — it sprawls in every direction, and most learning material makes it *worse*, not better.
@@ -24,18 +36,19 @@ So you do what most people do: you collect tutorials. You open twelve tabs. You 
 
 ---
 
-## The Idea (Pareto, applied to your career)
+## The Idea
 
 There is a small set of backend concepts that explain **almost everything** you will ever build:
 
-- Why your API is slow → HTTP lifecycle + indexing
-- Why your query is fast in dev but dies in prod → connection pooling + transactions
-- Why your login is insecure → hashing vs. encryption vs. encoding
-- Why your server falls over at 1,000 users → stateless architecture + caching + load balancing
+| What goes wrong | The concept that explains it |
+|---|---|
+| 💥 Your API is inexplicably slow | HTTP lifecycle + indexing |
+| 🧨 A query that's fine in dev dies in prod | Connection pooling + transactions |
+| 🔓 Your login is insecure | Hashing vs. encryption vs. encoding |
+| 📉 Your server falls over at 1,000 users | Stateless architecture + caching + load balancing |
+| 😬 Data silently corrupted | ACID + transactions + normalization |
 
-Learn those **20%** deeply and the remaining 80% stops feeling like a wall and starts feeling like trivia.
-
-> **The 20/80 Backend Course** is that 20%. Not a list of 400 links. Five pillars, distilled to the concepts that carry the weight.
+Master those deeply and the rest of backend stops feeling like a wall and starts feeling like trivia.
 
 ---
 
@@ -63,7 +76,8 @@ You do **not** need 5 years of experience. You need a map.
 | 🎯 **Interview-ready fundamentals** | The questions interviewers actually ask, answered properly. Not hand-waved. |
 | 🧠 **Senior-level judgment** | Knowing *why* one design beats another — ACID vs. eventual consistency, SQL vs. NoSQL, sync vs. async. |
 | 🐛 **The ability to debug** | When something breaks at 2am, you'll know *where in the stack* to look, and why. |
-| 🚫 **Zero impostor syndrome** | Not because you know everything — but because you know what the important 20% is, and where the edges are. |
+| 🛡️ **Production instincts** | The failure modes nobody teaches you until they bite you — N+1 queries, connection exhaustion, cache invalidation. |
+| 🚫 **Zero impostor syndrome** | Not because you know everything — but because you know what actually matters, and where the edges are. |
 
 ---
 
@@ -141,8 +155,8 @@ You do **not** need 5 years of experience. You need a map.
 ## 🗺️ How to Use This Repo
 
 ```bash
-git clone https://github.com/joesef1/20-80-backend-course.git
-cd 20-80-backend-course
+git clone https://github.com/joesef1/bulletproof-backend.git
+cd bulletproof-backend
 ```
 
 Then just read, in order. Each topic is a self-contained markdown file — short, dense, and written to be *understood*, not skimmed.
@@ -152,12 +166,14 @@ Then just read, in order. Each topic is a self-contained markdown file — short
 | Your situation | Start here |
 |---|---|
 | 🟢 **Strong fundamentals**, want depth | Pillar 2 → 3 → 4 → 5 |
-| 🟡 **Framework-literate, fundamentals fuzzy** | Pillar 1 from the top, then Pillar 2 |
+| 🟡 **Framework-literate**, fundamentals fuzzy | Pillar 1 from the top, then Pillar 2 |
 | 🔴 **Starting out** | Pillar 1 in order. Don't skip the handshakes. |
 | 🎤 **Interview in 2 weeks** | Pillar 1 REST section → Pillar 2 ACID/Joins/Transactions → Pillar 3 |
 | 😵 **Lost, need the big picture** | Read `main.md` first — it's the whole checklist in one page |
 
 > 💡 **Pro tip:** After reading a topic, close the file and explain it out loud to an empty room. If you can't, you didn't learn it — you just recognized it.
+
+> 🛡️ **Bulletproof habit:** For every topic, ask *"what breaks if I get this wrong?"* That question is the whole difference between working code and production code.
 
 ---
 
@@ -170,7 +186,7 @@ This repo is a **work in progress**, and it gets better the more smart people ad
 - 📝 **Improve a topic** — better examples, clearer analogies, more depth
 - ➕ **Add a missing topic** — especially in Pillars 3–5
 - 🌐 **Add translations** — this material should be accessible to everyone
-- 💡 **Suggest a pillar** — "what's missing from the 20%?"
+- 💡 **Suggest a pillar** — "what's missing?"
 
 **Contribution guidelines:**
 - Keep it **practical** — real examples, real failure modes
@@ -195,6 +211,9 @@ The problem it solves. When you'll actually need it.
 
 ## How It Works
 The mechanism. Diagrams encouraged.
+
+## Failure Modes
+What breaks when it's implemented wrong. (This is the bulletproof part.)
 
 ## Example
 Real code. Real request/response.
@@ -241,6 +260,6 @@ Released under the [MIT License](LICENSE). Free to use, share, and teach from.
 
 ⭐ Star it · 🍴 Fork it · 🤝 Improve it
 
-*"You don't have to learn all of backend. You just have to learn the right 20%."*
+🛡️ *"You don't have to learn all of backend. You just have to learn what holds it up."*
 
 </div>
