@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(rtk ls *)"
+      "Bash(rtk ls *)",
+      "Bash(rtk grep *)",
+      "Bash(git check-ignore *)",
+      "Bash(env)",
+      "Bash(claude *)"
     ]
   }
 }

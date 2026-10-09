@@ -1,0 +1,5 @@
+# Claude Code settings containing API keys
+.claude/settings.json
+
+# Optional: ignore other local Claude settings if needed
+.claude/settings.local.json
