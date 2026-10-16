@@ -1,136 +1,302 @@
-# Backend Engineering Fundamentals: The Master Checklist
+# Backend Learning Roadmap: Where to Start and What Comes Next
 
-## Pillar 1: The Internet & Communication
+`content.md` is the full topic list. It groups topics by **category** (networking, APIs, databases, and so on).
 
-The foundational rules of how data moves across the web.
+This file is different. It puts the same topics in **learning order**. It answers: what should you learn first, what comes after that, and why.
 
-- **HTTP/HTTPS Lifecycle**
-  - **DNS Resolution:** How a domain name (like `google.com`) is translated into an IP address.
-  - **TCP Handshake:** The 3-way handshake (SYN, SYN-ACK, ACK) that establishes a reliable connection.
-  - **TLS/SSL Handshake:** How HTTPS encrypts data in transit to prevent packet sniffing.
-  - **The Request/Response Cycle:** The anatomy of an HTTP request (Method, Headers, Body) and response (Status Code, Headers, Body).
-- **RESTful API Design**
-  - **HTTP Verbs:** Strict adherence to `GET` (read), `POST` (create), `PUT` (replace), `PATCH` (partial update), and `DELETE` (remove).
-  - **Idempotency:** Understanding which methods can be called multiple times without changing the result beyond the initial application (e.g., `PUT`, `DELETE`, `GET`).
-  - **Resource-Based URLs:** Designing endpoints around nouns, not verbs (e.g., `/users/123/orders` instead of `/getOrdersForUser?id=123`).
-  - **Status Codes:** Mastery of the 5 categories (1xx Info, 2xx Success, 3xx Redirect, 4xx Client Error, 5xx Server Error).
-- **Real-Time vs. Asynchronous Communication**
-  - **Webhooks:** Server-to-server HTTP callbacks pushed when an event occurs (Event-Driven).
-  - **Polling (Short & Long):** The client repeatedly asking the server if there is new data.
-  - **WebSockets:** A persistent, bi-directional, full-duplex TCP connection for real-time apps (like chat).
-- **Data Serialization**
-  - **JSON parsing:** How native language objects (like Python dicts) are serialized into strings for transport.
-  - **Data Validation:** Enforcing strict schemas on incoming JSON payloads (e.g., using Pydantic).
-- **CORS (Cross-Origin Resource Sharing)**
-  - **What it is:** A browser security mechanism that blocks frontend requests to a different domain/port unless the backend explicitly allows it.
-  - **Why it matters:** Every Django + React/Next.js project hits this. The browser sends a preflight `OPTIONS` request before the actual request.
-  - **How to handle it:** Using `django-cors-headers` middleware to whitelist frontend origins.
-- **API Versioning**
-  - **What it is:** Strategies for evolving your API without breaking existing clients.
-  - **Common patterns:** URL versioning (`/api/v1/`), header versioning (`Accept: application/vnd.api+json;version=1`), and query param versioning (`?version=1`).
-- **HTTP/2 and HTTP/3**
-  - **HTTP/2:** Multiplexing (multiple requests over a single TCP connection), header compression, server push.
-  - **HTTP/3:** Built on QUIC (UDP-based), eliminates TCP head-of-line blocking.
+Rule: **follow the stages in order.** Each stage depends on the stages before it. Do not jump to Stage 6 before you finish Stages 1–5.
 
-## Pillar 2: Databases & Data Management
+## How to Use This Roadmap
 
-How state is stored, retrieved, and structured safely.
+1. Start at Stage 1. Move forward one stage at a time.
+2. Inside a stage, learn the topics in the listed order.
+3. At the end of each stage there is a checkpoint. If you cannot pass it, do not move on yet.
+4. If you already know a stage well, skim it and pass its checkpoint, then move on.
+5. Tags like `[00]` or `[07]` show which `content.md` section a topic comes from. They help you find the topic in the raw list.
 
-- **Relational Databases (SQL)**
-  - **ACID Properties:** Atomicity, Consistency, Isolation, Durability (guarantees that database transactions are processed reliably).
-  - **Normalization:** Organizing data to reduce redundancy (1NF, 2NF, 3NF).
-  - **Joins:** Deep understanding of `INNER JOIN`, `LEFT JOIN`, `RIGHT JOIN`, and `FULL OUTER JOIN`.
-  - **Transactions:** Grouping multiple SQL statements into a single unit of work (`COMMIT` or `ROLLBACK`).
-- **NoSQL Databases**
-  - **Key-Value Stores (Redis):** In-memory data structure stores, perfect for caching and queues.
-  - **Document Stores (MongoDB):** Storing JSON-like documents, ideal for flexible, unstructured data.
-  - **When to choose NoSQL over SQL:** Understanding the CAP Theorem (Consistency, Availability, Partition Tolerance).
-- **Database Indexing**
-  - **What it is:** A data structure (usually a B-Tree) that improves the speed of data retrieval at the cost of slower writes and more storage.
-  - **Primary vs. Foreign Keys:** How tables relate to one another.
-  - **Composite Indexes:** Indexing multiple columns together.
-- **ORMs (Object-Relational Mapping)**
-  - **Abstraction:** How Django ORM or SQLAlchemy convert Python classes into SQL tables.
-  - **The N+1 Query Problem:** The most common ORM performance killer (accidentally querying the database inside a loop) and how to fix it (using `select_related` or `prefetch_related`).
-- **Database Migrations**
-  - **What it is:** Version control for your database schema. Django's `makemigrations` generates Python files that describe schema changes; `migrate` applies them.
-  - **Why it matters:** Understanding migration dependencies, squashing migrations, and handling data migrations (not just schema migrations) is critical in production.
-- **Connection Pooling**
-  - **What it is:** Reusing database connections instead of opening/closing one per request.
-  - **Why it matters:** Without pooling, a production Django app under load will exhaust database connections and crash.
-  - **Tools:** `pgbouncer` (external) or Django 5.1+ built-in persistent connections (`CONN_MAX_AGE`, `CONN_HEALTH_CHECKS`).
+## The Map
 
-## Pillar 3: Security & Identity
+Stage numbers are **learning order** (1–8). They are not the same as `content.md` section numbers (00–09). All 10 sections are covered. Some stages merge two sections, and some sections are split across stages.
 
-Defending the application and verifying users.
+```mermaid
+flowchart LR
+    S1["Stage 1<br/>How the Web Works<br/>(00 + part of 06)"] --> S2["Stage 2<br/>Build an API<br/>(01 + part of 00)"]
+    S2 --> S3["Stage 3<br/>Store Data<br/>(02)"]
+    S3 --> S4["Stage 4<br/>Secure It<br/>(03)"]
+    S4 --> S5["Stage 5<br/>Test It<br/>(05)"]
+    S5 --> S6["Stage 6<br/>Ship It<br/>(04 + 06)"]
+    S6 --> S7["Stage 7<br/>Scale It<br/>(07)"]
+    S7 --> S8["Stage 8<br/>Distribute It<br/>(08 + 09)"]
+```
 
-- **Authentication vs. Authorization**
-  - **Authentication (AuthN):** "Are you who you say you are?" (Verifying identity).
-  - **Authorization (AuthZ):** "Are you allowed to do this?" (Checking permissions/roles).
-- **Session-Based Auth (Stateful)**
-  - How the server creates a session, stores the ID in the database, and sets an `HttpOnly` cookie in the client's browser.
-- **Token-Based Auth (Stateless / JWT)**
-  - The anatomy of a JSON Web Token (Header, Payload, Signature).
-  - Why JWTs do not require a database lookup to verify identity.
-  - The difference between Access Tokens (short-lived) and Refresh Tokens (long-lived).
-- **Cryptography Basics**
-  - **Hashing (Bcrypt / Argon2):** One-way scrambling used exclusively for passwords.
-  - **Encryption (AES / RSA):** Two-way scrambling requiring a key, used for sensitive data (like credit cards).
-  - **Encoding (Base64):** Translating data for safe transport (NOT for security).
-- **The Big 3 Vulnerabilities**
-  - **XSS (Cross-Site Scripting):** Attackers injecting malicious JavaScript into the frontend. Prevented by escaping user input and using `HttpOnly` cookies.
-  - **CSRF (Cross-Site Request Forgery):** Attackers tricking a user's browser into executing unwanted actions on another site. Prevented by anti-CSRF tokens.
-  - **SQL Injection:** Attackers inputting SQL commands into form fields. Prevented by using parameterized queries (which ORMs do automatically).
-- **OAuth 2.0 / OpenID Connect**
-  - **OAuth 2.0:** An authorization framework that lets third-party apps access a user's resources without sharing passwords (e.g., "Login with Google").
-  - **OpenID Connect (OIDC):** An authentication layer on top of OAuth 2.0 that verifies user identity.
-  - **Flows:** Authorization Code Flow (most common for server-side apps), Client Credentials (machine-to-machine).
-- **Rate Limiting & Throttling**
-  - **What it is:** Restricting how many API requests a client can make in a given time window.
-  - **Why it matters:** Prevents abuse, brute-force attacks, and protects server resources.
-  - **In DRF:** Built-in throttle classes — `AnonRateThrottle`, `UserRateThrottle`, and custom throttles.
+Section `04 — Production Readiness and Reliability` is not missing. It lives in **Stage 6**. All 9 of its topics are there: config/secrets, twelve-factor, health checks, shutdown, error handling, logging, alerting, timeouts/retries, and incident debugging.
 
-## Pillar 4: Performance & Scalability
+Why this order in one sentence: you cannot build an API without knowing how HTTP works, you cannot secure or test what you have not built, you should not ship or scale what you cannot test, and distributed systems only make sense after you have shipped one working system.
 
-Handling massive amounts of traffic without crashing.
+---
 
-- **Caching Strategies**
-  - Storing frequently requested, computationally heavy data in memory (Redis/Memcached).
-  - **Cache Invalidation:** The hardest problem in computer science (knowing exactly when to delete outdated cached data).
-- **Asynchronous Task Queues**
-  - Decoupling the main web server from heavy workloads.
-  - The architecture of a message broker (Redis/RabbitMQ) and worker nodes (Celery).
-- **Scaling Systems**
-  - **Vertical Scaling (Scale-Up):** Adding more CPU/RAM to a single server (easy, but has a hard limit and creates a single point of failure).
-  - **Horizontal Scaling (Scale-Out):** Adding more servers to the pool (requires a load balancer and stateless architecture).
-- **Load Balancing**
-  - How tools like Nginx or AWS ALB distribute incoming traffic evenly across multiple server instances.
-- **Pagination**
-  - **Offset Pagination:** `LIMIT 10 OFFSET 20` — simple but slow on large datasets (database still scans skipped rows).
-  - **Cursor Pagination:** Uses a pointer to the last item seen — fast and scales well for infinite scroll and large datasets.
+## Stage 1 — How the Web Works
 
-## Pillar 5: Deployment & Infrastructure
+Goal: understand what happens when a client talks to a server.
 
-Getting code from your laptop to the public internet reliably.
+Learn in this order:
 
-- **Containerization (Docker)**
-  - **Images vs. Containers:** An image is the blueprint (Dockerfile); a container is the running instance.
-  - **Why we use it:** Eliminates the "it works on my machine" problem by packaging the OS, dependencies, and code into one isolated unit.
-- **CI/CD (Continuous Integration / Continuous Deployment)**
-  - **CI:** Automated testing and linting that runs every time code is pushed to GitHub.
-  - **CD:** Automated deployment of that code to the production server if all tests pass.
-- **Environment Variables & Secrets Management**
-  - The concept of the `.env` file.
-  - Why API keys, database URLs, and secret keys must _never_ be hardcoded or committed to version control.
-- **Web Servers vs. App Servers**
-  - **Reverse Proxies (Nginx):** Handles raw internet traffic, SSL termination, and static files.
-  - **App Servers (Uvicorn / Gunicorn):** Translates the HTTP requests into Python code (WSGI/ASGI) that Django or FastAPI can understand.
-- **Logging & Monitoring**
-  - **Django Logging:** Configuring loggers, handlers, and formatters in `settings.py` to track application behavior.
-  - **Error Tracking:** Tools like Sentry that catch production exceptions automatically and alert you before users report them.
-- **Testing**
-  - **Unit Tests:** Testing individual functions/methods in isolation to verify they return correct results.
-  - **Integration Tests:** Testing how components work together — views, serializers, and the database as a connected system.
-  - **Mocking:** Replacing external dependencies (third-party APIs, email services, task queues) with fakes during tests so tests run fast and don't depend on external services.
-  - **Fixtures & Factories:** Creating reliable, repeatable test data (e.g., using `factory_boy` instead of manually creating objects in every test).
-  - **Test Coverage:** Measuring what percentage of your codebase is exercised by tests (using `coverage.py`).
+1. First-Principles Thinking and Technical Trade-offs `[00]` — how to break a problem into basic parts and compare options. Learn this first because every later stage asks you to make trade-offs.
+2. Backend Architecture and Request Lifecycle `[00]` — the big picture: client → network → server → database → back to client. This is the frame everything else hangs on.
+3. Networking Fundamentals — DNS, TCP vs. UDP, connection setup, client-server talk `[00]` — how two machines connect at all. You need this before HTTP makes sense.
+4. HTTP and HTTPS — request/response lifecycle, methods, headers, status codes `[00]` — the language of the web. Almost every later topic builds on this.
+5. TLS and Connection Management — handshakes, reuse, persistent connections `[00]` — how HTTPS keeps data private and how connections are reused for speed.
+6. DNS, Domains, HTTPS, and TLS Termination `[00]` — how a domain name becomes a real server connection, and where encryption stops (the reverse proxy). Needs topics 3–5 first.
+7. Web Servers, Application Servers, and Reverse Proxies `[06]` — what Nginx does vs. what your app server does. Placed here (not in Stage 6) because TLS termination only makes sense once you know what a reverse proxy is.
+8. Application Hosting and Infrastructure Fundamentals `[06]` — where your server runs. Light version here; deep deployment comes in Stage 6.
+9. CORS `[00]` — why browsers block cross-origin requests and how backends allow them. Needs HTTP (topic 4) first.
+
+Checkpoint: explain out loud what happens when you type a URL and press Enter — DNS, TCP, TLS, HTTP request, reverse proxy, app server, response. If you cannot name each step, repeat this stage.
+
+---
+
+## Stage 2 — Build an API
+
+Goal: build a working API with clean structure.
+
+Needs Stage 1, because an API is just HTTP plus structure.
+
+Learn in this order:
+
+1. API Architecture and Request Handling `[01]` — how a request moves through your app: route → middleware → handler → response.
+2. Separation of Concerns — controllers, services, repositories, middleware `[01]` — where each piece of code belongs. Learn before writing real endpoints.
+3. REST API Design — resources, HTTP methods, idempotency, status codes `[01]` — how to shape URLs and use methods correctly. Needs HTTP (Stage 1) first.
+4. Data Serialization, Validation, and Transformation `[01]` — how JSON becomes app objects and back. Needs REST basics first.
+5. Input Validation and Trust Boundaries `[01]` — never trust client input; check it at the edge. Pairs with topic 4.
+6. Error Handling and Consistent API Responses `[01]` — one error format for the whole API. This is the **API-level** part. App-wide error handling (log it, alert on it, retry it) comes in Stage 6.
+7. OpenAPI: The Universal Contract Between Clients and Servers `[01]` — how to describe your API so clients and tests can rely on it. Needs a working API (topics 1–6) first.
+8. API Versioning and Compatibility `[01]` — how to change an API without breaking clients. Last, because you only version something that already exists.
+9. Concurrency and Parallelism `[00]` — how a server handles many requests at once (threads, processes, event loops).
+10. I/O-Bound vs. CPU-Bound Work `[00]` — why waiting on a database is different from heavy math, and why that picks your concurrency model. Needs topic 9 first, and it sets up background jobs in Stage 7.
+
+Checkpoint: build a small CRUD API with clean layers, validated input, one error format, and an OpenAPI doc. Explain why each endpoint uses its HTTP method and status code.
+
+Note: `content.md` lists "Session-Based and Token-Based Authentication" under `[01]` and again under `[03]`. It is taught once, in Stage 4. Stage 2 only needs to know that auth exists.
+
+---
+
+## Stage 3 — Store Data Correctly
+
+Goal: store state without losing or corrupting it.
+
+Needs Stage 2, because your API handlers are what read and write the database.
+
+Learn in this order:
+
+1. Database Fundamentals and Relational Data Modeling `[02]` — tables, rows, keys, and how to model real things as tables.
+2. Relationships, Constraints, and Normalization `[02]` — how tables link, how the database rejects bad data, and how to remove duplication.
+3. Transactions and ACID Properties `[02]` — how to group writes so they all succeed or all fail. Needs topic 1 first.
+4. Transaction Isolation and Concurrency Control `[02]` — what happens when two writes touch the same rows at the same time. Needs topic 3 first.
+5. Business Logic and Data Integrity — invariants, atomic operations, race conditions `[02]` — where a rule should live (app vs. database) and how races break it. Needs topics 3–4 first.
+6. Indexing Strategies and Trade-offs `[02]` — how indexes speed up reads and slow down writes. Needs modeling (topics 1–2) first.
+7. ORMs and Database Abstraction — benefits, limits, generated queries `[02]` — how app code talks to the database. Learn after SQL basics so you can judge what the ORM hides.
+8. Connection Pooling `[02]` — why apps reuse database connections instead of opening one per request. Needs ORM/app-server knowledge first.
+9. Database Schema Evolution and Migrations `[02]` — how to change table shape safely. Needs topics 1–2 first.
+10. Database Performance and Diagnosis — query plans, slow queries, N+1 problems `[02]` — how to find why a query is slow. Last, because it uses everything above. Deep query tuning continues in Stage 7.
+
+Checkpoint: design tables for a small shop (users, orders, items), add one transaction that moves money or stock, explain its isolation level, add one index and say what it costs, and show one N+1 query plus its fix.
+
+---
+
+## Stage 4 — Secure It
+
+Goal: verify who the user is and block common attacks.
+
+Needs Stages 2–3, because login sessions and tokens are stored data, and most attacks target APIs and databases.
+
+Learn in this order:
+
+1. Authentication and Authorization `[03]` — AuthN ("who are you?") vs. AuthZ ("are you allowed?"). The base of everything in this stage.
+2. Session-Based and Token-Based Authentication `[03]` — cookies/sessions vs. tokens/JWTs. This is the one canonical place for this topic (it also appears under `[01]` in `content.md`). Needs Stage 2 (HTTP, headers, cookies) and Stage 3 (where sessions live).
+3. Cryptography Basics `[03]` — hashing (passwords) vs. encryption (secrets) vs. encoding (transport). Needs topic 2 first, so password storage makes sense.
+4. OAuth 2.0 and OpenID Connect `[03]` — "Login with Google" done right. Needs topics 1–2 first.
+5. Common Web/API Vulnerabilities — XSS, CSRF, SQL injection, broken access control, IDOR `[03]` — the attacks you must block. Needs API (Stage 2), database (Stage 3), and auth (topics 1–2) first.
+6. API Security and Abuse Prevention — rate limiting, brute-force protection, request-size limits `[03]` — how to slow attackers down. Needs topic 5 first.
+7. Security Fundamentals and Threat Modeling `[03]` — how to list what can go wrong before it does. Placed after the attacks so the method has real examples to work on.
+8. Network Security and Firewalls `[03]` — which traffic may reach your servers at all. Last here because it connects to infrastructure (Stage 6).
+
+Checkpoint: add login to your Stage 2 API, protect one admin-only route, store passwords hashed (never plain), add rate limiting to the login route, and name one threat you blocked at each layer (input, auth, network).
+
+---
+
+## Stage 5 — Test What You Built
+
+Goal: prove your API, database, and auth work — and keep working.
+
+Needs Stages 2–4, because you test the thing you already built.
+
+Learn in this order:
+
+1. Testing Strategies — unit, integration, end-to-end `[05]` — what each test type covers and when to use it.
+2. Test Doubles — mocks, stubs, fakes, fixtures `[05]` — how to replace slow or external pieces during tests. Needs topic 1 first.
+3. Test Data Management `[05]` — how to create repeatable test data without a mess. Needs topic 2 first.
+4. Test Coverage and Test-Driven Development `[05]` — what coverage tells you (and what it hides), and how to write tests first. Needs topics 1–3 first.
+5. API Testing and Contract Testing `[05]` — how to test endpoints and keep client/server promises in sync. Needs Stage 2 plus OpenAPI.
+6. Database Testing and Transaction Behavior `[05]` — how to test code that writes to a database (rollbacks, isolation). Needs Stage 3.
+7. Authentication and Authorization Testing `[05]` — how to test login, permissions, and blocked access. Needs Stage 4. Last, because it stacks on API + database + auth testing.
+
+Checkpoint: your API has unit tests for logic, integration tests for endpoints + database, and at least one test that proves an unauthorized user is blocked.
+
+---
+
+## Stage 6 — Ship It to Production
+
+Goal: run your tested app on real servers, safely.
+
+Needs Stages 1–5. Shipping untested or insecure code is how outages happen.
+
+Learn in this order:
+
+1. DevOps and Infrastructure Fundamentals `[06]` — the big picture of shipping: build, test, deploy, run.
+2. Production Configuration and Secrets Management `[04]` — config per environment, secrets never in code. First practical step before anything touches a server.
+3. The Twelve-Factor App `[04]` — twelve rules for apps that deploy cleanly. Read early; apply through the whole stage.
+4. Containerization — Docker `[06]` — how to pack your app so it runs the same everywhere. Needs topic 2 first.
+5. CI/CD and Deployment Automation `[06]` — how tests run on every push and good builds deploy by themselves. Needs Stage 5 (tests) plus topic 4.
+6. Deployment Strategies and Rollbacks `[06]` — how to release without downtime and how to undo a bad release. Needs topic 5 first.
+7. Database Migrations in Production `[06]` — how to change live tables without losing data. Needs Stage 3 plus topic 6.
+8. Database Backups and Recovery `[06]` — how to restore data after something bad. Pairs with topic 7. Practice restores, not just backups.
+9. Health Checks and Production Readiness `[04]` — how your app tells the platform "I am ready" or "I am sick". Needs topics 4–6 first.
+10. Graceful Shutdown `[04]` — how your app finishes current work before stopping. Pairs with topic 9; deployers need both.
+11. Error Handling `[04]` — app-wide: catch, log, and classify errors. This is the **production** part (the API response format was Stage 2).
+12. Logging, Monitoring, and Observability `[04]` — how to see what your app is doing in production. Needs topic 11 first.
+13. Error Tracking and Alerting `[04]` — how to wake someone when it breaks. Needs topic 12 first.
+14. Timeouts and Retries `[04]` — how to call other services without hanging forever. Needs topics 12–13 so retries are visible, not silent.
+15. Production Incident Debugging `[04]` — how to find the cause during an outage. Last: it uses the whole stage.
+
+Checkpoint: deploy your app with Docker + CI/CD, secrets outside code, health checks on, logs and alerts working, a tested backup restore, and one practiced rollback.
+
+---
+
+## Stage 7 — Scale It
+
+Goal: handle more traffic and heavier work without breaking.
+
+Needs Stage 6, because you scale a system that already runs in production. Scaling a system you cannot observe or deploy is guesswork.
+
+Learn in this order:
+
+1. Latency, Throughput, and Performance `[07]` — what to measure before you change anything.
+2. Performance Profiling and Bottleneck Diagnosis `[07]` — how to find the slowest part. Needs topic 1 first. Never optimize without this step.
+3. Database Query Optimization `[07]` — advanced tuning that builds on Stage 3 (indexing, query plans, N+1).
+4. Pagination `[07]` — offset vs. cursor, and why one dies at scale. Needs topic 3 first; it is the cheapest database load fix.
+5. Caching Fundamentals and Invalidation `[07]` — what to cache, where, and when to throw it away. Needs Stage 3 (data) and measurement (topics 1–2) first.
+6. Object Storage `[07]` — where files live (not in your database). Independent of caching, but placed here because file serving is a scaling question.
+7. Background Jobs and Task Queues `[07]` — how to move slow work off the request path. Needs Stage 2 (I/O vs. CPU-bound) plus topics 1–2.
+8. Reliable Asynchronous Processing — idempotency, retries, duplicate delivery `[07]` — how to make background work correct when messages arrive twice. Needs topic 7 first.
+9. Scalability `[07]` — vertical vs. horizontal, stateless design. Last: it sums up the whole stage.
+
+Checkpoint: take a slow endpoint, profile it, make it fast with one fix (index, pagination, or cache), move one slow task to a queue with safe retries, and explain why your app can or cannot run on two servers.
+
+---
+
+## Stage 8 — Distribute It and Design Systems
+
+Goal: reason about many servers working as one, and practice system design.
+
+Needs all stages before it. Distributed ideas assume you already know networking, APIs, databases, auth, shipping, and scaling.
+
+Learn in this order:
+
+1. Load Balancing `[08]` — how traffic spreads across servers. Listed here (not earlier) because it only matters once you run more than one server (Stage 7).
+2. Distributed Systems Concepts `[08]` — nodes, partitions, replication, leaders and followers. Needs topic 1 first.
+3. Consistency and Availability `[08]` — what each means for your users when parts fail. Needs topic 2 first.
+4. CAP Theorem `[08]` — why you cannot have it all during a network split. Needs topic 3 first.
+5. Fault Tolerance and Redundancy `[08]` — how to survive failures. Needs topics 2–4 first.
+6. Capacity Planning and Resource Management `[08]` — how much hardware you need and when to add more. Needs Stage 7 measurement plus topics 1–5.
+7. Full-Text Search Using Elasticsearch for Blazingly Fast Search `[08]` — one real distributed tool, used as a case study. Needs topics 2–5 first so its trade-offs make sense.
+8. System Design in Practice `[09]` — design whole systems from the pieces above. This is the capstone. `content.md` lists the section with no sub-topics yet; treat it as practice tasks (URL shortener, rate limiter, feed, chat) that combine Stages 1–8.
+
+Checkpoint: design a small system on paper (for example a URL shortener): draw clients, load balancer, app servers, database, cache, and queue. State your CAP choice, what breaks first under load, and how you would know.
+
+---
+
+## Topic Index — Nothing Is Lost
+
+Every topic from `content.md`, and the stage where it is taught:
+
+| `content.md` section | Topic | Taught in |
+|---|---|---|
+| 00 | Backend Architecture and Request Lifecycle | Stage 1 |
+| 00 | First-Principles Thinking and Technical Trade-offs | Stage 1 |
+| 00 | Networking Fundamentals | Stage 1 |
+| 00 | HTTP and HTTPS | Stage 1 |
+| 00 | TLS and Connection Management | Stage 1 |
+| 00 | Concurrency and Parallelism | Stage 2 |
+| 00 | I/O-Bound vs. CPU-Bound Work | Stage 2 |
+| 00 | DNS, Domains, HTTPS, and TLS Termination | Stage 1 |
+| 00 | CORS | Stage 1 |
+| 01 | API Architecture and Request Handling | Stage 2 |
+| 01 | Separation of Concerns | Stage 2 |
+| 01 | REST API Design | Stage 2 |
+| 01 | Data Serialization, Validation, Transformation | Stage 2 |
+| 01 | OpenAPI | Stage 2 |
+| 01 | API Versioning and Compatibility | Stage 2 |
+| 01 | Error Handling and Consistent API Responses | Stage 2 (API format) |
+| 01 | Session-Based and Token-Based Authentication | Stage 4 (taught once) |
+| 01 | Input Validation and Trust Boundaries | Stage 2 |
+| 02 | Database Fundamentals and Relational Modeling | Stage 3 |
+| 02 | Relationships, Constraints, Normalization | Stage 3 |
+| 02 | Business Logic and Data Integrity | Stage 3 |
+| 02 | Transactions and ACID | Stage 3 |
+| 02 | Transaction Isolation and Concurrency Control | Stage 3 |
+| 02 | Indexing Strategies and Trade-offs | Stage 3 |
+| 02 | Database Performance and Diagnosis | Stage 3 (basics; advanced in Stage 7) |
+| 02 | ORMs and Database Abstraction | Stage 3 |
+| 02 | Schema Evolution and Migrations | Stage 3 |
+| 02 | Connection Pooling | Stage 3 |
+| 03 | Authentication and Authorization | Stage 4 |
+| 03 | OAuth 2.0 and OpenID Connect | Stage 4 |
+| 03 | Session-Based and Token-Based Authentication | Stage 4 (canonical) |
+| 03 | Cryptography Basics | Stage 4 |
+| 03 | Common Web/API Vulnerabilities | Stage 4 |
+| 03 | API Security and Abuse Prevention | Stage 4 |
+| 03 | Network Security and Firewalls | Stage 4 |
+| 03 | Security Fundamentals and Threat Modeling | Stage 4 |
+| 04 | Production Configuration and Secrets | Stage 6 |
+| 04 | Logging, Monitoring, Observability | Stage 6 |
+| 04 | Error Tracking and Alerting | Stage 6 |
+| 04 | Error Handling | Stage 6 (app-wide; API format was Stage 2) |
+| 04 | Timeouts and Retries | Stage 6 |
+| 04 | Graceful Shutdown | Stage 6 |
+| 04 | Health Checks and Production Readiness | Stage 6 |
+| 04 | Production Incident Debugging | Stage 6 |
+| 04 | The Twelve-Factor App | Stage 6 |
+| 05 | Testing Strategies | Stage 5 |
+| 05 | Test Doubles | Stage 5 |
+| 05 | Test Data Management | Stage 5 |
+| 05 | Test Coverage and TDD | Stage 5 |
+| 05 | API Testing and Contract Testing | Stage 5 |
+| 05 | Database Testing and Transaction Behavior | Stage 5 |
+| 05 | Authentication and Authorization Testing | Stage 5 |
+| 06 | Web Servers, App Servers, Reverse Proxies | Stage 1 (basics for TLS/proxy) |
+| 06 | Containerization — Docker | Stage 6 |
+| 06 | CI/CD and Deployment Automation | Stage 6 |
+| 06 | Application Hosting and Infrastructure | Stage 1 (light) → Stage 6 (full) |
+| 06 | Database Backups and Recovery | Stage 6 |
+| 06 | Database Migrations in Production | Stage 6 |
+| 06 | Deployment Strategies and Rollbacks | Stage 6 |
+| 06 | DevOps and Infrastructure Fundamentals | Stage 6 |
+| 07 | Latency, Throughput, Performance | Stage 7 |
+| 07 | Performance Profiling and Bottlenecks | Stage 7 |
+| 07 | Database Query Optimization | Stage 7 |
+| 07 | Caching Fundamentals and Invalidation | Stage 7 |
+| 07 | Background Jobs and Task Queues | Stage 7 |
+| 07 | Reliable Async Processing | Stage 7 |
+| 07 | Object Storage | Stage 7 |
+| 07 | Scalability | Stage 7 |
+| 07 | Pagination | Stage 7 |
+| 08 | Distributed Systems Concepts | Stage 8 |
+| 08 | Consistency and Availability | Stage 8 |
+| 08 | CAP Theorem | Stage 8 |
+| 08 | Fault Tolerance and Redundancy | Stage 8 |
+| 08 | Load Balancing | Stage 8 |
+| 08 | Capacity Planning and Resource Management | Stage 8 |
+| 08 | Full-Text Search with Elasticsearch | Stage 8 |
+| 09 | System Design in Practice | Stage 8 (capstone; sub-topics open) |
+
+Two topics appear twice in `content.md` and are taught once: session/token auth (Stage 4) and error handling (split: API format in Stage 2, app-wide handling in Stage 6).

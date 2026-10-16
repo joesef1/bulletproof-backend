@@ -22,8 +22,8 @@ the skill file and follows it while working.
 ## Before You Start
 
 1. Confirm the topic is not already covered. Search the repository first.
-2. Read `main.md` to see where the topic belongs (which pillar).
-3. Pick the target folder, for example `Pillar 2/Relational Databases (SQL)/`.
+2. Read `content.md` for the topic catalog and `main.md` for the learning order (which stage the topic belongs to).
+3. Pick the target location based on `main.md` stage order. Do not create a new top-level folder without agreement.
 4. Decide the level: beginner, intermediate, or advanced.
 
 ## Step 1 — Research
