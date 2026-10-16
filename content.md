@@ -101,4 +101,4 @@
 6. Capacity Planning and Resource Management
 7. Full-Text Search Using Elasticsearch for Blazingly Fast Search
 
-09 — System Design in practice
+09 — System Design in Practice

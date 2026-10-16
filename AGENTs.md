@@ -431,7 +431,7 @@ type(scope): short message
 
 Examples:
 
-- docs(pillar-1): clarify TCP handshake
+- docs(stage-1): clarify TCP handshake
 - docs(roadmap): add database transactions
 - chore(config): add markdown linting
 

@@ -112,8 +112,8 @@ Confirm all of the following before finishing:
 
 Examples:
 
-- `docs(pillar-2): add connection pooling tutorial`
-- `docs(pillar-1): fix TLS handshake diagram`
+- `docs(stage-3): add connection pooling tutorial`
+- `docs(stage-1): fix TLS handshake diagram`
 - `docs(workflow): document tutorial workflow`
 
 3. Keep one logical change per commit.
