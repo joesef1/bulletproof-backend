@@ -280,7 +280,9 @@ When showing backend code, include error handling, validation, security, or test
 
 10. File organization
 
-Before creating or modifying a tutorial:
+Before creating or modifying a tutorial, follow the process in WORKFLOW.md. It describes the step-by-step workflow and which skill to use at each step.
+
+In short, before creating or modifying a tutorial:
 
 1. Inspect the existing repository structure.
 2. Read the relevant roadmap or topic checklist.
