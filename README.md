@@ -35,6 +35,16 @@ So most people collect tutorials. They open twelve tabs. They half-read each one
 
 ---
 
+## Learning Backend in the AI Era
+
+AI changed how we learn. Any syntax, any boilerplate, any standard snippet is one prompt away. Memorizing those things used to be valuable. It is not anymore.
+
+What AI cannot do for you: know what to ask, judge if the answer is right, and choose between options. When AI writes your database query, you still must know if it is slow. When it designs your login flow, you still must know if it is safe. A wrong answer that looks right is worse than no answer at all.
+
+So this repo focuses on the timeless parts: how requests, data, and failures really work. These do not change when a new tool comes out. Learn them, and AI becomes a strong helper — you guide it, check it, and make the calls. Not the opposite.
+
+---
+
 ## Who Is This For?
 
 **This repo is for you if any of these sound familiar:**
