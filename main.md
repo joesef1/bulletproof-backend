@@ -41,15 +41,14 @@ Goal: understand what happens when a client talks to a server.
 
 Learn in this order:
 
-1. First-Principles Thinking and Technical Trade-offs `[00]` — how to break a problem into basic parts and compare options. Learn this first because every later stage asks you to make trade-offs.
-2. Backend Architecture and Request Lifecycle `[00]` — the big picture: client → network → server → database → back to client. This is the frame everything else hangs on.
-3. Networking Fundamentals — DNS, TCP vs. UDP, connection setup, client-server talk `[00]` — how two machines connect at all. You need this before HTTP makes sense.
-4. HTTP and HTTPS — request/response lifecycle, methods, headers, status codes `[00]` — the language of the web. Almost every later topic builds on this.
-5. TLS and Connection Management — handshakes, reuse, persistent connections `[00]` — how HTTPS keeps data private and how connections are reused for speed.
-6. DNS, Domains, HTTPS, and TLS Termination `[00]` — how a domain name becomes a real server connection, and where encryption stops (the reverse proxy). Needs topics 3–5 first.
-7. Web Servers, Application Servers, and Reverse Proxies `[06]` — what Nginx does vs. what your app server does. Placed here (not in Stage 6) because TLS termination only makes sense once you know what a reverse proxy is.
-8. Application Hosting and Infrastructure Fundamentals `[06]` — where your server runs. Light version here; deep deployment comes in Stage 6.
-9. CORS `[00]` — why browsers block cross-origin requests and how backends allow them. Needs HTTP (topic 4) first.
+1. Backend Architecture and Request Lifecycle `[00]` — the big picture: client → network → server → database → back to client. This is the frame everything else hangs on.
+2. Networking Fundamentals — DNS, TCP vs. UDP, connection setup, client-server talk `[00]` — how two machines connect at all. You need this before HTTP makes sense.
+3. HTTP and HTTPS — request/response lifecycle, methods, headers, status codes `[00]` — the language of the web. Almost every later topic builds on this.
+4. TLS and Connection Management — handshakes, reuse, persistent connections `[00]` — how HTTPS keeps data private and how connections are reused for speed.
+5. DNS, Domains, HTTPS, and TLS Termination `[00]` — how a domain name becomes a real server connection, and where encryption stops (the reverse proxy). Needs topics 2–4 first.
+6. Web Servers, Application Servers, and Reverse Proxies `[06]` — what Nginx does vs. what your app server does. Placed here (not in Stage 6) because TLS termination only makes sense once you know what a reverse proxy is.
+7. Application Hosting and Infrastructure Fundamentals `[06]` — where your server runs. Light version here; deep deployment comes in Stage 6.
+8. CORS `[00]` — why browsers block cross-origin requests and how backends allow them. Needs HTTP (topic 3) first.
 
 Checkpoint: explain out loud what happens when you type a URL and press Enter — DNS, TCP, TLS, HTTP request, reverse proxy, app server, response. If you cannot name each step, repeat this stage.
 
@@ -222,7 +221,6 @@ Every topic from `content.md`, and the stage where it is taught:
 | `content.md` section | Topic | Taught in |
 |---|---|---|
 | 00 | Backend Architecture and Request Lifecycle | Stage 1 |
-| 00 | First-Principles Thinking and Technical Trade-offs | Stage 1 |
 | 00 | Networking Fundamentals | Stage 1 |
 | 00 | HTTP and HTTPS | Stage 1 |
 | 00 | TLS and Connection Management | Stage 1 |

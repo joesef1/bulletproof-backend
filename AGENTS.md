@@ -98,35 +98,40 @@ Every paragraph should help the reader understand something useful.
 
 ⸻
 
-4. Teaching approach
+4. Teaching Approach
 
-Teach concepts in a logical order, from the basic idea to practical application.
+Teach for understanding, not memorization.
 
-When relevant, explain:
+Explain concepts in a logical order, starting with a familiar problem and gradually building toward the technical details.
 
-1. The problem: What problem are we trying to solve?
-2. Why it matters: Why should a backend developer care?
-3. The concept: What is the idea, in simple words?
-4. How it works: What happens internally or step by step?
-5. The example: How can we see it in practice?
-6. The application: How would we use it in a real backend?
-7. The failure modes: What can go wrong, and why?
-8. The trade-offs: What are the limitations and alternatives?
+When appropriate, follow this teaching sequence:
 
-Use this order as a guide, not a mandatory template for every topic.
+1. The Story: Introduce a realistic situation or problem.
+2. The Problem: Explain what goes wrong and why a solution is needed.
+3. The Concept: Introduce the technical idea using simple English.
+4. How It Works: Explain what happens step by step, using diagrams whenever useful.
+5. A Real-World Example: Show how the concept applies to a backend system.
+6. Trade-offs: Explain the benefits, limitations, and alternatives.
+7. Failure Scenarios: Explain what can go wrong and why.
+8. Key Takeaways: Summarize the most important lessons.
 
-- Start with the simplest accurate explanation.
-- Explain prerequisites before relying on them.
-- Introduce advanced details only when the reader has enough context.
-- Explain why a concept exists, not just what it means.
-- Connect related concepts when doing so improves understanding.
-- Use concrete examples instead of abstract explanations whenever possible.
-- Explain the reasoning behind technical decisions.
-- Distinguish essential knowledge from optional advanced details.
+This sequence is a guide, not a mandatory template. Adapt it to the topic.
 
-Do not turn every topic into an encyclopedia.
+Teaching Rules
 
-Short topics should remain short. Large topics may need several focused tutorials.
+- Explain one main idea at a time.
+- Introduce prerequisites before using unfamiliar concepts.
+- Explain technical terms in simple English when they first appear.
+- Use concrete examples instead of abstract definitions whenever possible.
+- Explain cause and effect: what happens, why it happens, and what follows.
+- Connect new concepts to previously learned concepts when useful.
+- Distinguish fundamental knowledge from advanced details.
+- Explain the reasoning behind engineering decisions.
+- Do not assume that defining a term means the reader understands it.
+- Avoid unnecessary repetition and overly long explanations.
+- Never sacrifice technical accuracy for simplicity.
+
+The goal is to help the reader explain a concept in their own words and apply the underlying reasoning to unfamiliar problems.
 
 ⸻
 
@@ -154,85 +159,145 @@ Use examples that help readers understand real development problems.
 
 ⸻
 
-6. Visual learning
+6. Visual Learning
 
-Use visual content when it makes a concept easier to understand.
+Visual explanations are a core part of this repository, not optional decoration.
 
-Prefer diagrams over long text when a diagram explains the relationships or sequence more clearly.
+Prefer diagrams when they make a concept easier to understand than text alone.
 
-Useful formats include:
-
-- Flowcharts for decisions and processes.
-- Sequence diagrams for communication between components.
-- Architecture diagrams for system structure.
-- Timelines for events that happen in order.
-- Tables for comparisons.
-- Small annotated code examples for implementation details.
+Preferred Visuals
 
 Use Mermaid as the default format for diagrams.
 
-Examples of useful diagrams include:
+Choose the diagram type based on what you need to explain:
 
-- The lifecycle of an HTTP request.
-- How a request moves through backend middleware.
-- How an API communicates with a database.
-- How a database transaction works.
-- How authentication differs from authorization.
-- How a WebSocket connection differs from a normal HTTP request.
+- Flowcharts: Decisions, processes, and request lifecycles.
+- Sequence diagrams: Communication between clients, servers, databases, and other components.
+- Architecture diagrams: System components and their relationships.
+- State diagrams: How a system or resource changes between states.
+- Timelines: Events that happen in a particular order.
+- Entity relationship diagrams: Database tables and their relationships.
+- Comparison tables: Differences between technologies, approaches, and trade-offs.
 
-Place diagrams near the text they explain.
+Visual Teaching Rules
 
-Explain the important parts of a diagram in the surrounding text. Do not assume that a diagram explains itself.
+1. Prefer a diagram when it can replace a long or confusing explanation.
+2. Place each diagram close to the concept it explains.
+3. Explain the diagram in simple English immediately before or after it.
+4. Use meaningful labels and keep diagrams easy to read.
+5. Break large diagrams into smaller ones when necessary.
+6. Show the direction of communication and the order of events when relevant.
+7. Use diagrams to explain cause and effect, not just component names.
+8. Never add a diagram merely to make a document look more complete.
+9. Verify Mermaid syntax and ensure the diagram accurately represents the explanation.
+10. Use external images only when they provide a clear advantage over a maintainable text-based diagram.
 
-Every visual must have a clear teaching purpose.
+11. One diagram per hop, anchored in plain language. For a multi-hop process (for example, the request lifecycle), give each hop a diagram only when it turns an abstract step — a domain name, a handshake, a connection pool — into something concrete. Each diagram must have a plain-language lead-in sentence before it and a short explanation after it. A diagram with no surrounding plain-language context teaches nothing.
 
-Do not add diagrams merely for decoration or to make a document look impressive.
+Use PlantUML only when it is more suitable for the diagram or required by an existing document.
 
-Prefer text-based diagrams that can be maintained in Git. Use external images only when they offer a clear advantage over a simple diagram.
+Visual-First Rule
 
-Use PlantUML only when it is better suited to the diagram or required by an existing document.
+When a concept involves multiple steps, interacting components, relationships, or state changes, consider a diagram before writing a long explanation.
 
-⸻
+For example, when teaching an HTTP request lifecycle, show the journey from the client through DNS, the network, the reverse proxy, the application, and the database.
 
-7. Practical application
+Then explain each step in plain English.
 
-Connect concepts to real backend development whenever relevant.
-
-Use examples involving HTTP, APIs, databases, authentication, validation, error handling, logging, testing, background jobs, real-time communication, deployment, and other backend engineering topics.
-
-When appropriate, show:
-
-- The problem being solved.
-- The relevant implementation.
-- How the implementation works.
-- Expected inputs and outputs.
-- How to test or verify the result.
-- Common mistakes.
-- Important production considerations.
-
-Prefer examples that readers can reproduce.
-
-Use TypeScript for Node.js examples and PostgreSQL for database examples when appropriate. Use other languages or technologies when they are more suitable for the topic.
-
-Do not restrict the entire repository to Python and SQL.
-
-Do not introduce unnecessary libraries, services, or infrastructure into an example.
-
-Clearly distinguish between:
-
-- A simplified example used for learning.
-- A working implementation.
-- A production-ready implementation.
-
-Do not call code production-ready unless its relevant requirements have been addressed.
-
-When applicable, explain security, validation, error handling, testing, and reliability.
-
-Avoid introducing microservices, distributed systems, or complex infrastructure when a simpler solution adequately solves the problem.
+A diagram must support the explanation, not replace it.
 
 ⸻
 
-8. Technical accuracy and research
+7. Conceptual Learning and Practical Examples
+
+This repository is a learning resource, not an implementation workspace.
+
+Do not write or implement code when creating or explaining learning material.
+
+The purpose is to understand how backend systems work, why they are designed that way, and how to make sound engineering decisions.
+
+Preferred Teaching Methods
+
+Use:
+
+- Realistic backend scenarios.
+- Step-by-step explanations.
+- Mermaid diagrams.
+- Request and response examples shown as plain text or tables.
+- Before-and-after comparisons.
+- Tables showing trade-offs.
+- Failure scenarios and their consequences.
+- Walkthroughs of what happens inside a system.
+- Exercises that require reasoning and explanation.
+
+Do Not Include
+
+- Implemented code examples.
+- Complete functions, classes, modules, or applications.
+- SQL statements or database scripts.
+- Shell commands intended to build or configure a working implementation.
+- Code-generation tasks presented as learning exercises.
+
+When an implementation detail is important, explain its behavior conceptually.
+
+For example, when teaching database transactions, show how two account balances change during a transfer. Use a diagram or table to demonstrate what happens if the transfer fails halfway through.
+
+Do not implement the transaction in SQL or backend code.
+
+Explain Real Engineering Decisions
+
+When discussing technologies or design patterns, explain:
+
+1. What problem they solve.
+2. How they work conceptually.
+3. When they are useful.
+4. What limitations they have.
+5. What alternatives exist.
+6. Why an engineer might choose one option over another.
+
+Use realistic examples from HTTP, APIs, databases, authentication, testing, observability, background jobs, deployment, and distributed systems.
+
+The reader should finish each topic understanding the concept well enough to discuss its behavior, benefits, limitations, and appropriate use.
+
+⸻
+
+8. No-Code Learning Policy
+
+The primary goal of this repository is conceptual understanding.
+
+Do not implement code as part of a tutorial or learning task unless I explicitly request an implementation.
+
+What Is Allowed
+
+- Mermaid and PlantUML diagrams.
+- Plain-language explanations of algorithms and processes.
+- Tables showing example inputs, outputs, states, or results.
+- HTTP requests and responses presented as illustrative text.
+- Conceptual walkthroughs of what a program or query would do.
+- Step-by-step descriptions of algorithms without implementation code.
+- Exercises that ask the reader to explain, compare, predict, diagnose, or design.
+- References to external documentation and learning resources.
+
+What Is Not Allowed by Default
+
+- Writing working implementations to demonstrate a concept.
+- Adding source files or executable examples as part of a tutorial.
+- Introducing code simply because the topic is technical.
+- Turning conceptual exercises into implementation assignments.
+
+Handling Existing Code
+
+If a topic refers to a real implementation, explain its behavior without reproducing the implementation.
+
+You may describe what a function, database query, or component does in plain English, but do not write its source code.
+
+If I explicitly request code for a separate task, follow that request for the specified task. Do not assume that one request permanently changes the learning policy.
+
+Default rule: explain the system, visualize its behavior, and teach the reasoning. Do not implement it.
+
+⸻
+
+9. Technical accuracy and research
 
 Accuracy is more important than completeness or confidence.
 
@@ -255,7 +320,7 @@ For fundamental concepts, prioritize a clear explanation and authoritative refer
 
 ⸻
 
-9. Code examples
+10. Code examples
 
 When code examples are useful:
 
@@ -278,7 +343,7 @@ When showing backend code, include error handling, validation, security, or test
 
 ⸻
 
-10. File organization
+11. File organization
 
 Before creating or modifying a tutorial, follow the process in WORKFLOW.md. It describes the step-by-step workflow and which skill to use at each step.
 
@@ -306,32 +371,33 @@ If the correct location is unclear, inspect existing conventions before asking q
 
 ⸻
 
-11. Existing topic structure
+12. Learning Document Structure
 
-Follow the topic structure documented in README.md and the existing tutorials.
+Follow the topic structure in README.md and the existing tutorials, adapting it when necessary.
 
-The current preferred sections are:
+For substantial topics, consider this structure:
 
-- What It Is: A short, plain-language definition.
-- Why It Matters: The problem it solves and why it is useful.
-- How It Works: The mechanism, supported by diagrams when useful.
-- Failure Modes: What can go wrong and why.
-- Example: A practical example with realistic code, requests, responses, or output when relevant.
-- Key Points: A short summary for review.
+1. The Story: A familiar situation that introduces the problem.
+2. The Problem: What goes wrong, and why does it matter?
+3. What It Is: A short, simple definition.
+4. How It Works: A conceptual explanation supported by diagrams where useful.
+5. Walkthrough: A step-by-step explanation of a realistic scenario.
+6. Trade-offs: Benefits, limitations, alternatives, and when the recommendation changes.
+7. Failure Modes: Important mistakes, failure scenarios, and their consequences.
+8. Key Takeaways: The most important points to remember.
+9. Knowledge Check: Questions that test understanding and reasoning.
 
-Keep this structure when it fits the topic.
+This is a flexible structure, not a checklist that every topic must follow.
 
-Adapt it when another structure teaches the concept more clearly. A short topic should not be expanded unnecessarily just to fill every section.
+Short topics should remain short. Use only the sections that improve understanding.
 
-Failure modes are an important part of this repository. Cover meaningful failure cases for substantial topics, especially when incorrect implementation can cause bugs, security issues, data loss, or reliability problems.
+Every tutorial must explain the subject itself. A collection of definitions or external links is not a substitute for teaching.
 
-Do not invent failure cases simply to fill a section.
-
-Every tutorial must teach the topic itself. A list of external links is not a substitute for an explanation.
+Do not include implementation code. Use diagrams, plain text, tables, and conceptual walkthroughs instead.
 
 ⸻
 
-12. Critical thinking and technical decisions
+13. Critical thinking and technical decisions
 
 Do not automatically agree with my assumptions.
 
@@ -349,7 +415,7 @@ The purpose is to build independent engineering judgment, not to memorize a list
 
 ⸻
 
-13. Verification and quality checks
+14. Verification and quality checks
 
 Before considering a substantial tutorial complete, verify the following when applicable:
 
@@ -380,7 +446,7 @@ For content-only tasks, use judgment. Do not introduce a test framework or build
 
 ⸻
 
-14. Commands and tools
+15. Commands and tools
 
 Use the simplest available tool that adequately solves the task.
 
@@ -399,7 +465,7 @@ Prefer small, reusable workflows over complicated agent systems.
 
 ⸻
 
-15. Communication style
+16. Communication style
 
 - Be direct, concise, and practical.
 - Use simple English in explanations to me.
@@ -415,7 +481,7 @@ For non-trivial changes, summarize what changed and how it was verified.
 
 ⸻
 
-16. Session hygiene
+17. Session hygiene
 
 - Avoid unnecessary file reads and repeated failed attempts.
 - After two failed corrections on the same issue, stop and summarize what has been learned before proposing another approach.
@@ -439,7 +505,7 @@ Keep each commit focused on one logical change and as small as reasonably possib
 
 ⸻
 
-17. Project Learnings
+18. Project Learnings
 
 This section records specific corrections that should improve future work.
 
@@ -462,3 +528,94 @@ Current project-specific reminders:
 - Do not commit without my consent.
 - Do not restrict backend engineering examples to Python and SQL.
 - Prioritize practical learning, clear explanations, and useful visuals over document length.
+
+⸻
+
+19. Prerequisite-First Learning
+
+Core Rule
+
+Never assume the reader knows a concept simply because it belongs to an earlier or related technical field.
+
+The reader is learning backend engineering from the foundations. They may understand JavaScript and web development but have little knowledge of networking, operating systems, databases, security, or distributed systems.
+
+Every document must be understandable using only:
+
+- Knowledge explicitly covered in previous learning materials.
+- Basic everyday knowledge.
+- Concepts explained within the current document.
+
+1. Check Prerequisites Before Writing
+
+Before creating or updating a learning document:
+
+1. Identify the concepts required to understand the topic.
+2. Check the learning roadmap and existing documents to determine which prerequisites have already been explained.
+3. Identify missing prerequisites, including concepts that may seem obvious to an experienced engineer.
+4. Explain missing prerequisites before using them to explain the main topic.
+
+Do not treat a concept as understood merely because it appears earlier in the roadmap. Verify that the relevant learning material actually covers it.
+
+2. Explain Concepts Before Depending on Them
+
+When introducing an unfamiliar technical term:
+
+- Explain what it means in simple English.
+- Explain why it exists and what problem it solves.
+- Give a familiar analogy or concrete example when helpful.
+- Explain its relationship to the current topic.
+- Avoid using other unexplained technical terms to define it.
+
+For example, do not explain a reverse proxy by mentioning load balancing, TLS termination, upstream servers, or caching without first explaining any unfamiliar terms that are necessary to understand the explanation.
+
+Introduce technical terminology gradually. Define a term before relying on it.
+
+3. Use Three Levels of Explanation
+
+Choose the appropriate level for each prerequisite.
+
+Level 1 — Already covered
+
+If an existing document explains the concept adequately, briefly remind the reader of it and link to that document.
+
+Level 2 — Needed but not yet covered
+
+Explain the minimum necessary background before continuing. Keep the explanation focused on the current topic and link to the relevant full topic when available.
+
+Level 3 — Essential to the current topic
+
+If the main topic cannot be understood without the concept, explain it properly before continuing. If the concept deserves its own document, keep that document focused and make the dependency clear.
+
+Never skip an essential prerequisite just to keep the document short.
+
+4. Respect the Learning Roadmap
+
+The roadmap defines the intended learning order.
+
+- Teach foundational concepts before advanced concepts that depend on them.
+- Do not introduce several advanced concepts at once when the reader has not learned their foundations.
+- If a document depends on a topic scheduled for later, either reorder the topics when justified or provide the necessary introductory explanation.
+- Do not assume that mentioning a concept and defining it in one sentence is equivalent to teaching it.
+- Do not reorganize the roadmap merely to accommodate an individual document. Make changes only when they improve the overall learning sequence.
+
+5. Keep Explanations Focused
+
+Prerequisite-first teaching does not mean explaining everything in every document.
+
+Explain enough background for the reader to follow the current explanation. Link to the full topic for deeper understanding.
+
+Avoid repeating entire explanations across multiple documents. Use consistent terminology and cross-references.
+
+6. Review for Hidden Assumptions
+
+Before finalizing a document, ask:
+
+- Does the explanation assume knowledge that the roadmap has not taught yet?
+- Are any technical terms used before being explained?
+- Does one unfamiliar term get explained using several other unfamiliar terms?
+- Can a beginner explain what each important component does and why it exists?
+- Does the document distinguish between a brief introduction and a complete explanation?
+
+If the reader would need to search the internet to understand an essential term, improve the explanation or provide the missing prerequisite.
+
+7. Keep teasers and summaries in plain language. Every "Why It Matters" blurb and every summary line must be understandable before the first technical term is defined in the document. If a layer is really the edge server, say "the front door"; if a step is really the database, say "the data store"; if a step is really the handler, say "a step in the app". Never use the technical term in the teaser — define it first, then use it.

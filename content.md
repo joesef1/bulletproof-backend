@@ -1,14 +1,13 @@
 00 — Backend Foundations and Networking
 
 1. Backend Architecture and Request Lifecycle
-2. First-Principles Thinking and Technical Trade-offs
-3. Networking Fundamentals — DNS, TCP vs. UDP, connection establishment, and client-server communication
-4. HTTP and HTTPS — request/response lifecycle, methods, headers, and status codes
-5. TLS and Connection Management — TLS handshakes, connection reuse, and persistent connections
-6. Concurrency and Parallelism
-7. I/O-Bound vs. CPU-Bound Work
-8. DNS, Domains, HTTPS, and TLS Termination
-9. CORS
+2. Networking Fundamentals — DNS, TCP vs. UDP, connection establishment, and client-server communication
+3. HTTP and HTTPS — request/response lifecycle, methods, headers, and status codes
+4. TLS and Connection Management — TLS handshakes, connection reuse, and persistent connections
+5. Concurrency and Parallelism
+6. I/O-Bound vs. CPU-Bound Work
+7. DNS, Domains, HTTPS, and TLS Termination
+8. CORS
 
 01 — API Engineering and Application Architecture
 
