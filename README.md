@@ -78,7 +78,7 @@ So this repo focuses on the timeless parts: how requests, data, and failures rea
 
 The ten sections:
 
-- **00 — Backend Foundations and Networking** — architecture, request lifecycle, DNS, TCP/UDP, HTTP/HTTPS, TLS, concurrency, I/O vs. CPU, CORS
+- **00 — Backend Foundations and Networking** — architecture, request lifecycle, DNS, TCP/UDP, ACLS, HTTP/HTTPS, TLS, concurrency, I/O vs. CPU, CORS
 - **01 — API Engineering and Application Architecture** — request handling, layers, REST, serialization, OpenAPI, versioning, errors, validation
 - **02 — Database Engineering and Data Integrity** — modeling, constraints, transactions, isolation, indexing, ORMs, migrations, pooling, diagnosis
 - **03 — Authentication, Security, and Access Control** — AuthN/AuthZ, sessions/tokens, OAuth/OIDC, crypto, common web bugs, rate limiting, firewalls, threat modeling

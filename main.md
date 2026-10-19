@@ -42,7 +42,7 @@ Goal: understand what happens when a client talks to a server.
 Learn in this order:
 
 1. Backend Architecture and Request Lifecycle `[00]` — the big picture: client → network → server → database → back to client. This is the frame everything else hangs on.
-2. Networking Fundamentals — DNS, TCP vs. UDP, connection setup, client-server talk `[00]` — how two machines connect at all. You need this before HTTP makes sense.
+2. Networking Fundamentals — DNS, TCP vs. UDP, ACLS, connection setup, client-server talk `[00]` — how two machines connect at all. You need this before HTTP makes sense.
 3. HTTP and HTTPS — request/response lifecycle, methods, headers, status codes `[00]` — the language of the web. Almost every later topic builds on this.
 4. TLS and Connection Management — handshakes, reuse, persistent connections `[00]` — how HTTPS keeps data private and how connections are reused for speed.
 5. DNS, Domains, HTTPS, and TLS Termination `[00]` — how a domain name becomes a real server connection, and where encryption stops (the reverse proxy). Needs topics 2–4 first.
@@ -218,83 +218,83 @@ Checkpoint: design a small system on paper (for example a URL shortener): draw c
 
 Every topic from `content.md`, and the stage where it is taught:
 
-| `content.md` section | Topic | Taught in |
-|---|---|---|
-| 00 | Backend Architecture and Request Lifecycle | Stage 1 |
-| 00 | Networking Fundamentals | Stage 1 |
-| 00 | HTTP and HTTPS | Stage 1 |
-| 00 | TLS and Connection Management | Stage 1 |
-| 00 | Concurrency and Parallelism | Stage 2 |
-| 00 | I/O-Bound vs. CPU-Bound Work | Stage 2 |
-| 00 | DNS, Domains, HTTPS, and TLS Termination | Stage 1 |
-| 00 | CORS | Stage 1 |
-| 01 | API Architecture and Request Handling | Stage 2 |
-| 01 | Separation of Concerns | Stage 2 |
-| 01 | REST API Design | Stage 2 |
-| 01 | Data Serialization, Validation, Transformation | Stage 2 |
-| 01 | OpenAPI | Stage 2 |
-| 01 | API Versioning and Compatibility | Stage 2 |
-| 01 | Error Handling and Consistent API Responses | Stage 2 (API format) |
-| 01 | Session-Based and Token-Based Authentication | Stage 4 (taught once) |
-| 01 | Input Validation and Trust Boundaries | Stage 2 |
-| 02 | Database Fundamentals and Relational Modeling | Stage 3 |
-| 02 | Relationships, Constraints, Normalization | Stage 3 |
-| 02 | Business Logic and Data Integrity | Stage 3 |
-| 02 | Transactions and ACID | Stage 3 |
-| 02 | Transaction Isolation and Concurrency Control | Stage 3 |
-| 02 | Indexing Strategies and Trade-offs | Stage 3 |
-| 02 | Database Performance and Diagnosis | Stage 3 (basics; advanced in Stage 7) |
-| 02 | ORMs and Database Abstraction | Stage 3 |
-| 02 | Schema Evolution and Migrations | Stage 3 |
-| 02 | Connection Pooling | Stage 3 |
-| 03 | Authentication and Authorization | Stage 4 |
-| 03 | OAuth 2.0 and OpenID Connect | Stage 4 |
-| 03 | Session-Based and Token-Based Authentication | Stage 4 (canonical) |
-| 03 | Cryptography Basics | Stage 4 |
-| 03 | Common Web/API Vulnerabilities | Stage 4 |
-| 03 | API Security and Abuse Prevention | Stage 4 |
-| 03 | Network Security and Firewalls | Stage 4 |
-| 03 | Security Fundamentals and Threat Modeling | Stage 4 |
-| 04 | Production Configuration and Secrets | Stage 6 |
-| 04 | Logging, Monitoring, Observability | Stage 6 |
-| 04 | Error Tracking and Alerting | Stage 6 |
-| 04 | Error Handling | Stage 6 (app-wide; API format was Stage 2) |
-| 04 | Timeouts and Retries | Stage 6 |
-| 04 | Graceful Shutdown | Stage 6 |
-| 04 | Health Checks and Production Readiness | Stage 6 |
-| 04 | Production Incident Debugging | Stage 6 |
-| 04 | The Twelve-Factor App | Stage 6 |
-| 05 | Testing Strategies | Stage 5 |
-| 05 | Test Doubles | Stage 5 |
-| 05 | Test Data Management | Stage 5 |
-| 05 | Test Coverage and TDD | Stage 5 |
-| 05 | API Testing and Contract Testing | Stage 5 |
-| 05 | Database Testing and Transaction Behavior | Stage 5 |
-| 05 | Authentication and Authorization Testing | Stage 5 |
-| 06 | Web Servers, App Servers, Reverse Proxies | Stage 1 (basics for TLS/proxy) |
-| 06 | Containerization — Docker | Stage 6 |
-| 06 | CI/CD and Deployment Automation | Stage 6 |
-| 06 | Application Hosting and Infrastructure | Stage 1 (light) → Stage 6 (full) |
-| 06 | Database Backups and Recovery | Stage 6 |
-| 06 | Database Migrations in Production | Stage 6 |
-| 06 | Deployment Strategies and Rollbacks | Stage 6 |
-| 06 | DevOps and Infrastructure Fundamentals | Stage 6 |
-| 07 | Latency, Throughput, Performance | Stage 7 |
-| 07 | Performance Profiling and Bottlenecks | Stage 7 |
-| 07 | Database Query Optimization | Stage 7 |
-| 07 | Caching Fundamentals and Invalidation | Stage 7 |
-| 07 | Background Jobs and Task Queues | Stage 7 |
-| 07 | Reliable Async Processing | Stage 7 |
-| 07 | Object Storage | Stage 7 |
-| 07 | Scalability | Stage 7 |
-| 07 | Pagination | Stage 7 |
-| 08 | Distributed Systems Concepts | Stage 8 |
-| 08 | Consistency and Availability | Stage 8 |
-| 08 | CAP Theorem | Stage 8 |
-| 08 | Fault Tolerance and Redundancy | Stage 8 |
-| 08 | Load Balancing | Stage 8 |
-| 08 | Capacity Planning and Resource Management | Stage 8 |
-| 08 | Full-Text Search with Elasticsearch | Stage 8 |
-| 09 | System Design in Practice | Stage 8 (capstone; sub-topics open) |
+| `content.md` section | Topic                                          | Taught in                                  |
+| -------------------- | ---------------------------------------------- | ------------------------------------------ |
+| 00                   | Backend Architecture and Request Lifecycle     | Stage 1                                    |
+| 00                   | Networking Fundamentals                        | Stage 1                                    |
+| 00                   | HTTP and HTTPS                                 | Stage 1                                    |
+| 00                   | TLS and Connection Management                  | Stage 1                                    |
+| 00                   | Concurrency and Parallelism                    | Stage 2                                    |
+| 00                   | I/O-Bound vs. CPU-Bound Work                   | Stage 2                                    |
+| 00                   | DNS, Domains, HTTPS, and TLS Termination       | Stage 1                                    |
+| 00                   | CORS                                           | Stage 1                                    |
+| 01                   | API Architecture and Request Handling          | Stage 2                                    |
+| 01                   | Separation of Concerns                         | Stage 2                                    |
+| 01                   | REST API Design                                | Stage 2                                    |
+| 01                   | Data Serialization, Validation, Transformation | Stage 2                                    |
+| 01                   | OpenAPI                                        | Stage 2                                    |
+| 01                   | API Versioning and Compatibility               | Stage 2                                    |
+| 01                   | Error Handling and Consistent API Responses    | Stage 2 (API format)                       |
+| 01                   | Session-Based and Token-Based Authentication   | Stage 4 (taught once)                      |
+| 01                   | Input Validation and Trust Boundaries          | Stage 2                                    |
+| 02                   | Database Fundamentals and Relational Modeling  | Stage 3                                    |
+| 02                   | Relationships, Constraints, Normalization      | Stage 3                                    |
+| 02                   | Business Logic and Data Integrity              | Stage 3                                    |
+| 02                   | Transactions and ACID                          | Stage 3                                    |
+| 02                   | Transaction Isolation and Concurrency Control  | Stage 3                                    |
+| 02                   | Indexing Strategies and Trade-offs             | Stage 3                                    |
+| 02                   | Database Performance and Diagnosis             | Stage 3 (basics; advanced in Stage 7)      |
+| 02                   | ORMs and Database Abstraction                  | Stage 3                                    |
+| 02                   | Schema Evolution and Migrations                | Stage 3                                    |
+| 02                   | Connection Pooling                             | Stage 3                                    |
+| 03                   | Authentication and Authorization               | Stage 4                                    |
+| 03                   | OAuth 2.0 and OpenID Connect                   | Stage 4                                    |
+| 03                   | Session-Based and Token-Based Authentication   | Stage 4 (canonical)                        |
+| 03                   | Cryptography Basics                            | Stage 4                                    |
+| 03                   | Common Web/API Vulnerabilities                 | Stage 4                                    |
+| 03                   | API Security and Abuse Prevention              | Stage 4                                    |
+| 03                   | Network Security and Firewalls                 | Stage 4                                    |
+| 03                   | Security Fundamentals and Threat Modeling      | Stage 4                                    |
+| 04                   | Production Configuration and Secrets           | Stage 6                                    |
+| 04                   | Logging, Monitoring, Observability             | Stage 6                                    |
+| 04                   | Error Tracking and Alerting                    | Stage 6                                    |
+| 04                   | Error Handling                                 | Stage 6 (app-wide; API format was Stage 2) |
+| 04                   | Timeouts and Retries                           | Stage 6                                    |
+| 04                   | Graceful Shutdown                              | Stage 6                                    |
+| 04                   | Health Checks and Production Readiness         | Stage 6                                    |
+| 04                   | Production Incident Debugging                  | Stage 6                                    |
+| 04                   | The Twelve-Factor App                          | Stage 6                                    |
+| 05                   | Testing Strategies                             | Stage 5                                    |
+| 05                   | Test Doubles                                   | Stage 5                                    |
+| 05                   | Test Data Management                           | Stage 5                                    |
+| 05                   | Test Coverage and TDD                          | Stage 5                                    |
+| 05                   | API Testing and Contract Testing               | Stage 5                                    |
+| 05                   | Database Testing and Transaction Behavior      | Stage 5                                    |
+| 05                   | Authentication and Authorization Testing       | Stage 5                                    |
+| 06                   | Web Servers, App Servers, Reverse Proxies      | Stage 1 (basics for TLS/proxy)             |
+| 06                   | Containerization — Docker                      | Stage 6                                    |
+| 06                   | CI/CD and Deployment Automation                | Stage 6                                    |
+| 06                   | Application Hosting and Infrastructure         | Stage 1 (light) → Stage 6 (full)           |
+| 06                   | Database Backups and Recovery                  | Stage 6                                    |
+| 06                   | Database Migrations in Production              | Stage 6                                    |
+| 06                   | Deployment Strategies and Rollbacks            | Stage 6                                    |
+| 06                   | DevOps and Infrastructure Fundamentals         | Stage 6                                    |
+| 07                   | Latency, Throughput, Performance               | Stage 7                                    |
+| 07                   | Performance Profiling and Bottlenecks          | Stage 7                                    |
+| 07                   | Database Query Optimization                    | Stage 7                                    |
+| 07                   | Caching Fundamentals and Invalidation          | Stage 7                                    |
+| 07                   | Background Jobs and Task Queues                | Stage 7                                    |
+| 07                   | Reliable Async Processing                      | Stage 7                                    |
+| 07                   | Object Storage                                 | Stage 7                                    |
+| 07                   | Scalability                                    | Stage 7                                    |
+| 07                   | Pagination                                     | Stage 7                                    |
+| 08                   | Distributed Systems Concepts                   | Stage 8                                    |
+| 08                   | Consistency and Availability                   | Stage 8                                    |
+| 08                   | CAP Theorem                                    | Stage 8                                    |
+| 08                   | Fault Tolerance and Redundancy                 | Stage 8                                    |
+| 08                   | Load Balancing                                 | Stage 8                                    |
+| 08                   | Capacity Planning and Resource Management      | Stage 8                                    |
+| 08                   | Full-Text Search with Elasticsearch            | Stage 8                                    |
+| 09                   | System Design in Practice                      | Stage 8 (capstone; sub-topics open)        |
 
 Two topics appear twice in `content.md` and are taught once: session/token auth (Stage 4) and error handling (split: API format in Stage 2, app-wide handling in Stage 6).

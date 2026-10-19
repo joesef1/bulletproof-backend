@@ -1,7 +1,7 @@
 00 — Backend Foundations and Networking
 
 1. Backend Architecture and Request Lifecycle
-2. Networking Fundamentals — DNS, TCP vs. UDP, connection establishment, and client-server communication
+2. Networking Fundamentals — DNS, TCP vs. UDP, ACLS, connection establishment, and client-server communication
 3. HTTP and HTTPS — request/response lifecycle, methods, headers, and status codes
 4. TLS and Connection Management — TLS handshakes, connection reuse, and persistent connections
 5. Concurrency and Parallelism
