@@ -31,6 +31,7 @@ Write tutorials that help developers understand backend engineering concepts dee
 
 - Prefer realistic backend engineering scenarios.
 - Use Mermaid diagrams when they clarify relationships or processes.
+- One diagram per hop in a multi-step process. Give each diagram a plain-language lead-in sentence before it and a short explanation after it.
 - Keep code examples focused and explain important lines.
 - Distinguish simplified examples from production-ready implementations.
 - Never invent technical facts or claim unverified code works.
@@ -42,3 +43,13 @@ Write tutorials that help developers understand backend engineering concepts dee
 - Follow the established topic structure when appropriate.
 - Avoid repeating information already covered elsewhere.
 - Research version-sensitive details using reliable documentation.
+
+## Pitfalls
+
+- Define before you name. Never use a technical term in a "Why It Matters" teaser before you explain it in the body.
+- Prefer `patch` over `write_file` for edits. `write_file` rewrites the whole file and is blocked if you did not read the file in this session; anchor the patch on a small, unique ASCII substring.
+- Keep patch anchors ASCII-only. Matching fails on Unicode punctuation such as en-dash, em-dash, arrow, and curly quotes. To remove a whole line, filter lines by an ASCII term instead.
+- Topic numbers in main.md and content.md are local to each stage's list, not global. Renumber and fix cross-references only within the stage you changed.
+- Verify after a partial failure. A script that exits non-zero may still have written some files and left others half-edited. Re-read the affected files before committing; do not trust the exit code alone.
+
+See `references/content-maintenance-checklist.md` for a reusable verification recipe.
